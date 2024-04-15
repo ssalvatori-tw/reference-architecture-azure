@@ -50,6 +50,8 @@ module "azure_aks" {
     resource_group = azurerm_resource_group.main.id
   }
 
+  agents_pool_max_surge = "10%"
+
   depends_on = [azurerm_resource_group.main]
 
   agents_size             = var.vm_size

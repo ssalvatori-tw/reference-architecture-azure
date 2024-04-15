@@ -18,15 +18,23 @@ terraform {
     }
     helm = {
       source  = "hashicorp/helm"
-      version = "~> 2.12"
+      version = "~> 2.13"
     }
     humanitec = {
       source  = "humanitec/humanitec"
-      version = "~> 1.0"
+      version = "~> 1.1.0"
     }
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "~> 2.25"
+      version = "~> 2.27"
+    }
+    time = {
+      source  = "hashicorp/time"
+      version = "0.11.1"
+    }
+    local = {
+      source  = "hashicorp/local"
+      version = "2.5.1"
     }
   }
   required_version = ">= 1.3.0"
@@ -56,6 +64,10 @@ provider "kubernetes" {
   host = module.base.aks_host
 
   cluster_ca_certificate = base64decode(module.base.aks_cluster_ca_certificate)
+
+  experiments {
+    manifest_resource = true
+  }
 
   exec {
     api_version = "client.authentication.k8s.io/v1beta1"
