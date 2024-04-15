@@ -29,3 +29,58 @@ variable "vm_size" {
   type        = string
   default     = "Standard_D2_v2"
 }
+
+variable "humanitec_envs" {
+  type    = set(string)
+  default = ["stagging", "production"]
+}
+
+variable "vault_name" {
+  type    = string
+  default = "humanitec-vault"
+}
+
+variable "vault_name_confidential" {
+  type    = string
+  default = "humanitec-vault-secret"
+}
+
+
+variable "orchestrator_sp_name" {
+  type    = string
+  default = "platform-orchestrator-sp-humanitec-vault"
+}
+
+variable "humanitec_operator_namespace" {
+  type    = string
+  default = "humanitec-operator-system"
+}
+
+
+variable "secret_store_id" {
+  type    = string
+  default = "azurepoc"
+}
+
+variable "secret_store_confidential_id" {
+  type    = string
+  default = "azurepoc-confidential"
+}
+
+
+variable "enable_orchestrator_access_confidential" {
+  description = "Enable access to the confidential vault for the orchestrator"
+  type        = bool
+  default     = false
+}
+
+variable "operator_identity" {
+  type    = string
+  default = "humanitec-operator-identity"
+}
+
+variable "operator_service_account_name" {
+  type    = string
+  default = "humanitec-operator-controller-manager"
+}
+
