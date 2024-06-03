@@ -66,12 +66,14 @@ module "azure_aks" {
 
 resource "azuread_application" "main" {
   display_name = var.cluster_name
-  owners       = [data.azuread_client_config.current.object_id]
+owners = var.owners
+  # owners       = [data.azuread_client_config.current.object_id]
 }
 
 resource "azuread_service_principal" "humanitec" {
   client_id = azuread_application.main.client_id
-  owners    = [data.azuread_client_config.current.object_id]
+  # owners    = [data.azuread_client_config.current.object_id]
+  owners = var.owners
 }
 
 resource "azuread_service_principal_password" "humanitec" {

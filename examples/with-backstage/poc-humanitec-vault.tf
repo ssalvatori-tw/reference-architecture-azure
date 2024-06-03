@@ -99,7 +99,7 @@ resource "kubernetes_manifest" "register_operator" {
       name      = var.secret_store_id
       namespace = var.humanitec_operator_namespace
       labels = {
-        "app.humanitec.io/default-store" = "true"
+        "app.humanitec.io/default-store" = "false"
       }
     }
     spec = {

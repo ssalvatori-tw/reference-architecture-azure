@@ -49,3 +49,7 @@ variable "subscription_id" {
   description = "Azure Subscription (ID) to use"
   type        = string
 }
+
+variable "owners" {
+  type = list(string)
+}

@@ -6,4 +6,5 @@ module "base" {
   subscription_id = var.subscription_id
   location        = var.location
   vm_size         = var.vm_size
+  owners          = var.poc_users
 }
