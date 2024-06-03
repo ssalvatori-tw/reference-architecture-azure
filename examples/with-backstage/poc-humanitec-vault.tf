@@ -121,7 +121,7 @@ resource "kubernetes_manifest" "register_operator" {
 resource "azuread_application" "humanitec_orchestrator_key_vault" {
   display_name = "humanitec_orchestrator_key_vault"
   description  = "Service Principal used by Humanitec Orchestrator to access Key Vault"
-  owners       = [data.azuread_client_config.current.object_id]
+  owners       = var.poc_users
 }
 
 resource "azuread_service_principal" "humanitec_orchestrator_vault" {
@@ -131,7 +131,7 @@ resource "azuread_service_principal" "humanitec_orchestrator_vault" {
 
   description = "Service Principal used by Humanitec Orchestrator to access Vault"
 
-  owners = [data.azuread_client_config.current.object_id]
+  owners = var.poc_users
 }
 
 resource "azuread_service_principal_password" "humanitec_orchestrator_vault" {

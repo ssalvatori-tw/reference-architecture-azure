@@ -25,8 +25,9 @@ data "azurerm_client_config" "current" {}
 
 resource "azuread_application" "humanitec_orchestrator" {
   display_name = "humanitec_orchestrator"
+  owners = var.poc_users
   description  = "Humanitec Orcherstrator"
-  owners       = [data.azuread_client_config.current.object_id]
+  # owners       = [data.azuread_client_config.current.object_id]
 }
 
 resource "azuread_service_principal" "humanitec_platform" {
@@ -34,8 +35,8 @@ resource "azuread_service_principal" "humanitec_platform" {
 
   description                  = "Service Principal used by Humanitec Orchestrator"
   app_role_assignment_required = false
-
-  owners = [data.azuread_client_config.current.object_id]
+  owners = var.poc_users
+  # owners = [data.azuread_client_config.current.object_id]
 }
 
 resource "time_rotating" "humanitec_platform" {
