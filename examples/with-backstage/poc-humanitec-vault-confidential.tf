@@ -16,13 +16,14 @@ resource "azurerm_key_vault" "humanitec_poc_confidential" {
 
 }
 
-# Create a role assignment for the current user
-resource "azurerm_role_assignment" "self-confidential" {
-  scope                = azurerm_key_vault.humanitec_poc_confidential.id
-  principal_id         = data.azurerm_client_config.current.object_id
-  role_definition_name = "Key Vault Administrator"
-}
 
+# Create a role assignment for poc users
+resource "azurerm_role_assignment" "poc-users-confidential" {
+  for_each             = toset(var.poc_users)
+  scope                = azurerm_key_vault.humanitec_poc_confidential.id
+  principal_id         = each.value
+  role_definition_name = "Key Vault Secrets Officer"
+}
 
 #
 # Humanitec Operator should have RO access to the confidential vault

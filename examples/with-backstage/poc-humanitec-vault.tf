@@ -16,12 +16,15 @@ resource "azurerm_key_vault" "humanitec_poc" {
 
 }
 
-# Create a role assignment for the current user
-resource "azurerm_role_assignment" "self" {
-  scope                = azurerm_key_vault.humanitec_poc.id
-  principal_id         = data.azurerm_client_config.current.object_id
-  role_definition_name = "Key Vault Administrator"
+# Create a role assignment for poc users
+resource "azurerm_role_assignment" "poc-users" {
+  for_each     = toset(var.poc_users)
+  scope        = azurerm_key_vault.humanitec_poc.id
+  principal_id = each.value
+  # role_definition_name = "Key Vault Administrator"
+  role_definition_name = "Key Vault Secrets Officer"
 }
+
 
 # Install Humanitec Operator
 resource "helm_release" "humanitec_operator" {

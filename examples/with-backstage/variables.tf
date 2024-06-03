@@ -84,3 +84,10 @@ variable "operator_service_account_name" {
   default = "humanitec-operator-controller-manager"
 }
 
+
+variable "poc_users" {
+  type = list(string)
+  default = [
+    "2ac3c1ee-823c-4d82-8eb1-17818e32ab38",
+  "6a6d3d1b-9b80-4693-8b86-75678e9f5436"]
+}
